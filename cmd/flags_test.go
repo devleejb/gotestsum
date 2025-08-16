@@ -3,7 +3,7 @@ package cmd
 import (
 	"testing"
 
-	"gotest.tools/v3/assert"
+	"github.com/devleejb/v3/assert"
 )
 
 func TestNoSummaryValue_SetAndString(t *testing.T) {

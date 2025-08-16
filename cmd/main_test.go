@@ -10,13 +10,13 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/devleejb/gotestsum/testjson"
+	"github.com/devleejb/v3/assert"
+	"github.com/devleejb/v3/assert/cmp"
+	"github.com/devleejb/v3/env"
+	"github.com/devleejb/v3/golden"
+	"github.com/devleejb/v3/skip"
 	"github.com/fatih/color"
-	"gotest.tools/gotestsum/testjson"
-	"gotest.tools/v3/assert"
-	"gotest.tools/v3/assert/cmp"
-	"gotest.tools/v3/env"
-	"gotest.tools/v3/golden"
-	"gotest.tools/v3/skip"
 )
 
 func TestUsage_WithFlagsFromSetupFlags(t *testing.T) {

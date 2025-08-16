@@ -8,14 +8,15 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
+	"runtime/debug"
 	"strings"
 	"sync/atomic"
 	"syscall"
 
+	"github.com/devleejb/gotestsum/internal/log"
+	"github.com/devleejb/gotestsum/testjson"
 	"github.com/dnephin/pflag"
 	"github.com/fatih/color"
-	"gotest.tools/gotestsum/internal/log"
-	"gotest.tools/gotestsum/testjson"
 )
 
 var version = "dev"
@@ -34,7 +35,12 @@ func Run(name string, args []string) error {
 
 	switch {
 	case opts.version:
-		fmt.Fprintf(os.Stdout, "gotestsum version %s\n", version)
+		info, ok := debug.ReadBuildInfo()
+		if !ok {
+			return fmt.Errorf("failed to read version info")
+		} else {
+			fmt.Fprintf(os.Stdout, "gotestsum version %s\n", info.Main.Version)
+		}
 		return nil
 	case opts.watch:
 		return runWatcher(opts)
@@ -138,7 +144,7 @@ func usage(out io.Writer, name string, flags *pflag.FlagSet) {
     %[1]s [flags] [--] [go test flags]
     %[1]s [command]
 
-See https://pkg.go.dev/gotest.tools/gotestsum#section-readme for detailed documentation.
+See https://pkg.go.dev/github.com/devleejb/gotestsum#section-readme for detailed documentation.
 
 Flags:
 `, name)

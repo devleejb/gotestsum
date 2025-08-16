@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	"gotest.tools/gotestsum/cmd"
-	"gotest.tools/gotestsum/cmd/tool/matrix"
-	"gotest.tools/gotestsum/cmd/tool/slowest"
-	"gotest.tools/gotestsum/internal/log"
+	"github.com/devleejb/gotestsum/cmd"
+	"github.com/devleejb/gotestsum/cmd/tool/matrix"
+	"github.com/devleejb/gotestsum/cmd/tool/slowest"
+	"github.com/devleejb/gotestsum/internal/log"
 )
 
 func main() {
