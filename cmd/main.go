@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
+	"runtime/debug"
 	"strings"
 	"sync/atomic"
 	"syscall"
@@ -34,7 +35,12 @@ func Run(name string, args []string) error {
 
 	switch {
 	case opts.version:
-		fmt.Fprintf(os.Stdout, "gotestsum version %s\n", version)
+		info, ok := debug.ReadBuildInfo()
+		if !ok {
+			return fmt.Errorf("failed to read version info")
+		} else {
+			fmt.Fprintf(os.Stdout, "gotestsum version %s\n", info.Main.Version)
+		}
 		return nil
 	case opts.watch:
 		return runWatcher(opts)
