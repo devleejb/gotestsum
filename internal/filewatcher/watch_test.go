@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/devleejb/v3/assert"
+	"github.com/devleejb/v3/env"
+	"github.com/devleejb/v3/fs"
 	"github.com/fsnotify/fsnotify"
-	"gotest.tools/v3/assert"
-	"gotest.tools/v3/env"
-	"gotest.tools/v3/fs"
 )
 
 func TestFSEventHandler_HandleEvent(t *testing.T) {

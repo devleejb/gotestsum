@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/devleejb/v3/assert"
+	"github.com/devleejb/v3/fs"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"gotest.tools/v3/assert"
-	"gotest.tools/v3/fs"
 )
 
 func TestWatch(t *testing.T) {

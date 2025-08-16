@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/devleejb/gotestsum/internal/dotwriter"
+	"github.com/devleejb/gotestsum/internal/log"
 	"golang.org/x/term"
-	"gotest.tools/gotestsum/internal/dotwriter"
-	"gotest.tools/gotestsum/internal/log"
 )
 
 func dotsFormatV1(out io.Writer) EventFormatter {

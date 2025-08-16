@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"gotest.tools/gotestsum/testjson"
-	"gotest.tools/v3/assert"
-	"gotest.tools/v3/fs"
+	"github.com/devleejb/gotestsum/testjson"
+	"github.com/devleejb/v3/assert"
+	"github.com/devleejb/v3/fs"
 )
 
 func TestPackagePercentile(t *testing.T) {
