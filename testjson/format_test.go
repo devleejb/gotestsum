@@ -5,8 +5,8 @@ import (
 	"io"
 	"testing"
 
-	"gotest.tools/v3/assert"
-	"gotest.tools/v3/golden"
+	"github.com/devleejb/v3/assert"
+	"github.com/devleejb/v3/golden"
 )
 
 // go-test-json files are generated using the following command:
@@ -191,7 +191,7 @@ func TestFormats_Coverage(t *testing.T) {
 	}
 
 	run := func(t *testing.T, tc testCase) {
-		patchPkgPathPrefix(t, "gotest.tools")
+		patchPkgPathPrefix(t, "github.com/devleejb")
 		out := new(bytes.Buffer)
 
 		if tc.input == "" {
