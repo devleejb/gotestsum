@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/devleejb/gotestsum/testjson"
+	"github.com/devleejb/v3/assert"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"gotest.tools/gotestsum/testjson"
-	"gotest.tools/v3/assert"
 )
 
 func TestSlowest(t *testing.T) {

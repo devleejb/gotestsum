@@ -1,4 +1,3 @@
-
 project_name: gotestsum
 
 release:
@@ -21,7 +20,7 @@ builds:
       - s390x
       - ppc64le
     env: [CGO_ENABLED=0]
-    ldflags: ["-s -w -X gotest.tools/gotestsum/cmd.version={{.Version}}"]  
+    ldflags: ["-s -w -X github.com/devleejb/gotestsum/cmd.version={{.Version}}"]
     ignore:
       - goos: darwin
         goarch: s390x
@@ -47,4 +46,4 @@ builds:
         goarch: ppc64le
 
 checksum:
-  name_template: '{{ .ProjectName }}-{{ .Version }}-checksums.txt'
+  name_template: "{{ .ProjectName }}-{{ .Version }}-checksums.txt"

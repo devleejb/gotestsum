@@ -5,7 +5,7 @@ import (
 	"io"
 	"strings"
 
-	"gotest.tools/v3/assert"
+	"github.com/devleejb/v3/assert"
 )
 
 type TestingT interface {

@@ -7,12 +7,13 @@ It is designed to work well for both local development, and for automation like 
 ## Install
 
 Download a binary from [releases](https://github.com/gotestyourself/gotestsum/releases), or build from
-source with `go install gotest.tools/gotestsum@latest`. To run without installing use
-`go run gotest.tools/gotestsum@latest`.
+source with `go install github.com/devleejb/gotestsum@latest`. To run without installing use
+`go run github.com/devleejb/gotestsum@latest`.
 
 ## Documentation
 
 **Core features**
+
 - Change the [test output format](#output-format), from compact to verbose with color highlighting.
 - Print a [summary](#summary) of the test run after running all the tests.
 - Use any [`go test` flag](#custom-go-test-command),
@@ -20,6 +21,7 @@ source with `go install gotest.tools/gotestsum@latest`. To run without installin
   or [run a compiled test binary](#executing-a-compiled-test-binary).
 
 **CI and Automation**
+
 - [`--junitfile`](#junit-xml-output) - write a JUnit XML file for integration with CI systems.
 - [`--jsonfile`](#json-file-output) - write all the [test2json](https://pkg.go.dev/cmd/test2json) input received by `gotestsum` to a file. The file
   can be used as input to [`gotestsum tool slowest`](#finding-and-skipping-slow-tests), or as a way to
@@ -28,11 +30,11 @@ source with `go install gotest.tools/gotestsum@latest`. To run without installin
   entire suite. Re-running individual tests can save significant time when working with flaky test suites.
 
 **Local Development**
+
 - [`--watch`](#run-tests-when-a-file-is-saved) - every time a `.go` file is saved run the tests for the package that changed.
 - [`--post-run-command`](#post-run-command) - run a command after the tests, can be used for desktop notification of the test run.
 - [`gotestsum tool slowest`](#finding-and-skipping-slow-tests) - find the slowest tests, or automatically update the source code of
   the slowest tests to add a conditional `t.Skip` statements. This statement allows you to skip the slowest tests using `gotestsum -- -short ./...`.
-
 
 ### Output Format
 
@@ -46,12 +48,12 @@ The nerdfonts icons requires a font from [Nerd Fonts](https://www.nerdfonts.com/
 
 Commonly used formats (see `--help` for a full list):
 
- * `dots` - print a character for each test.
- * `pkgname` (default) - print a line for each package.
- * `testname` - print a line for each test and package.
- * `testdox` - print a sentence for each test using [gotestdox](https://github.com/bitfield/gotestdox).
- * `standard-quiet` - the standard `go test` format.
- * `standard-verbose` - the standard `go test -v` format.
+- `dots` - print a character for each test.
+- `pkgname` (default) - print a line for each package.
+- `testname` - print a line for each test and package.
+- `testdox` - print a sentence for each test using [gotestdox](https://github.com/bitfield/gotestdox).
+- `standard-quiet` - the standard `go test` format.
+- `standard-verbose` - the standard `go test -v` format.
 
 Have an idea for a new format?
 Please [share it on github](https://github.com/gotestyourself/gotestsum/issues/new)!
@@ -67,24 +69,25 @@ A demonstration of three `--format` options.
 
 Following the formatted output is a summary of the test run. The summary includes:
 
- * The test output, and elapsed time, for any test that fails or is skipped.
- * The build errors for any package that fails to build.
- * A `DONE` line with a count of tests run, tests skipped, tests failed, package build errors,
-   and the elapsed time including time to build.
+- The test output, and elapsed time, for any test that fails or is skipped.
+- The build errors for any package that fails to build.
+- A `DONE` line with a count of tests run, tests skipped, tests failed, package build errors,
+  and the elapsed time including time to build.
 
-   ```
-   DONE 101 tests[, 3 skipped][, 2 failures][, 1 error] in 0.103s
-   ```
+  ```
+  DONE 101 tests[, 3 skipped][, 2 failures][, 1 error] in 0.103s
+  ```
 
 To hide parts of the summary use `--hide-summary section`.
 
-
 **Example: hide skipped tests in the summary**
+
 ```
 gotestsum --hide-summary=skipped
 ```
 
 **Example: hide everything except the DONE line**
+
 ```
 gotestsum --hide-summary=skipped,failed,errors,output
 # or
@@ -93,6 +96,7 @@ gotestsum --hide-summary=all
 
 **Example: hide test output in the summary, only print names of failed and skipped tests
 and errors**
+
 ```
 gotestsum --hide-summary=output
 ```
@@ -112,11 +116,10 @@ work with your CI system these values can be customized using the
 `--junitfile-testsuite-name`, or `--junitfile-testcase-classname` flags. These flags
 accept the following values:
 
-* `short` - the base name of the package (the single term specified by the
+- `short` - the base name of the package (the single term specified by the
   package statement).
-* `relative` - a package path relative to the root of the repository
-* `full` - the full package path (default)
-
+- `relative` - a package path relative to the root of the repository
+- `full` - the full package path (default)
 
 Note: If Go is not installed, or the `go` binary is not in `PATH`, the `GOVERSION`
 environment variable can be set to remove the "failed to lookup go version for junit xml"
@@ -154,12 +157,12 @@ TESTS_TOTAL             # number of tests run
 To get more details about the test run, such as failure messages or the full list of failed
 tests, run `gotestsum` with either a `--jsonfile` or `--junitfile` and parse the
 file from the post-run-command. The
-[gotestsum/testjson](https://pkg.go.dev/gotest.tools/gotestsum/testjson?tab=doc)
+[gotestsum/testjson](https://pkg.go.dev/github.com/devleejb/gotestsum/testjson?tab=doc)
 package may be used to parse the JSON file output.
 
 **Example: desktop notifications**
 
-First install the example notification command with `go get gotest.tools/gotestsum/contrib/notify`.
+First install the example notification command with `go get github.com/devleejb/gotestsum/contrib/notify`.
 The command will be downloaded to `$GOPATH/bin` as `notify`. Note that this
 example `notify` command only works on Linux with `notify-send` and on macOS with
 [terminal-notifer](https://github.com/julienXX/terminal-notifier) installed.
@@ -214,11 +217,11 @@ a data race is detected.
 Note that using `--rerun-fails` may require the use of other flags, depending on
 how you specify args to `go test`:
 
-* when used with `--raw-command` the re-run will pass additional arguments to
+- when used with `--raw-command` the re-run will pass additional arguments to
   the command. The first arg is a `-test.run` flag with a regex that matches the test to re-run,
   and second is the name of a go package. These additional args can be passed to `go test`,
   or a test binary.
-* when used with any `go test` args (anything after `--` on the command line), the list of
+- when used with any `go test` args (anything after `--` on the command line), the list of
   packages to test must be specified as a space separated list using the `--packages` arg.
 
   **Example**
@@ -227,7 +230,7 @@ how you specify args to `go test`:
   gotestsum --rerun-fails --packages="./..." -- -count=2
   ```
 
-* if any of the `go test` args should be passed to the test binary, instead of
+- if any of the `go test` args should be passed to the test binary, instead of
   `go test` itself, the `-args` flag must be used to separate the two groups of
   arguments. `-args` is a special flag that is understood by `go test` to indicate
   that any following args should be passed directly to the test binary.
@@ -237,7 +240,6 @@ how you specify args to `go test`:
   ```
   gotestsum --rerun-fails --packages="./..." -- -count=2 -args -update-golden
   ```
-
 
 ### Custom `go test` command
 
@@ -249,21 +251,25 @@ environment variable.
 You can use `--debug` to echo the command before it is run.
 
 **Example: set build tags**
+
 ```
 gotestsum -- -tags=integration ./...
 ```
 
 **Example: run tests in a single package**
+
 ```
 gotestsum -- ./io/http
 ```
 
 **Example: enable coverage**
+
 ```
 gotestsum -- -coverprofile=cover.out ./...
 ```
 
 **Example: run a script instead of `go test`**
+
 ```
 gotestsum --raw-command -- ./scripts/run_tests.sh
 ```
@@ -271,16 +277,17 @@ gotestsum --raw-command -- ./scripts/run_tests.sh
 Note: when using `--raw-command`, the script must follow a few rules about
 stdout and stderr output:
 
-* The stdout produced by the script must only contain the `test2json` output, or
+- The stdout produced by the script must only contain the `test2json` output, or
   `gotestsum` will fail. If it isn't possible to change the script to avoid
   non-JSON output, you can use `--ignore-non-json-output-lines` (added in version 1.7.0)
   to ignore non-JSON lines and write them to `gotestsum`'s stderr instead.
-* Any stderr produced by the script will be considered an error (this behaviour
+- Any stderr produced by the script will be considered an error (this behaviour
   is necessary because package build errors are only reported by writing to
   stderr, not the `test2json` stdout). Any stderr produced by tests is not
   considered an error (it will be in the `test2json` stdout).
 
 **Example: accept input from stdin**
+
 ```
 cat out.json | gotestsum --raw-command -- cat
 ```
@@ -300,11 +307,13 @@ done
 ```
 
 You can run:
+
 ```
 gotestsum --raw-command ./profile.sh ./...
 ```
 
 **Example: using `TEST_DIRECTORY`**
+
 ```
 TEST_DIRECTORY=./io/http gotestsum
 ```
@@ -330,7 +339,6 @@ must be included so that `go tool test2json` receives all the output.
 
 To execute a test binary without installing Go, see
 [running without go](./.project/docs/running-without-go.md).
-
 
 ### Finding and skipping slow tests
 
@@ -374,8 +382,7 @@ The next time tests are run using `--short` all the slow tests will be skipped.
 
 [testjson]: https://golang.org/cmd/test2json/
 
-
-### Run tests when a file is saved 
+### Run tests when a file is saved
 
 When the `--watch` flag is set, `gotestsum` will watch directories using
 [file system notifications](https://pkg.go.dev/github.com/fsnotify/fsnotify).
@@ -398,21 +405,21 @@ of the main Go module.
 
 While in watch mode, pressing some keys will perform an action:
 
-* `r` will run tests for the previous event.
+- `r` will run tests for the previous event.
   Added in version 1.6.1.
-* `u` will run tests for the previous event, with the `-update` flag added.
+- `u` will run tests for the previous event, with the `-update` flag added.
   Many [golden](https://gotest.tools/v3/golden) packages use this flag to automatically
   update expected values of tests.
   Added in version 1.8.1.
-* `d` will run tests for the previous event using `dlv test`, allowing you to 
+- `d` will run tests for the previous event using `dlv test`, allowing you to
   debug a test failure using [delve]. A breakpoint will automatically be added at
   the first line of any tests which failed in the previous run. Additional
   breakpoints can be added with [`runtime.Breakpoint`](https://golang.org/pkg/runtime/#Breakpoint)
   or by using the delve command prompt.
   Added in version 1.6.1.
-* `a` will run tests for all packages, by using `./...` as the package selector.
+- `a` will run tests for all packages, by using `./...` as the package selector.
   Added in version 1.7.0.
-* `l` will scan the directory list again, and if there are any new directories
+- `l` will scan the directory list again, and if there are any new directories
   which contain a file with a `.go` extension, they will be added to the watch
   list.
   Added in version 1.7.0.
@@ -422,6 +429,7 @@ Note that [delve] must be installed in order to use debug (`d`).
 [delve]: https://github.com/go-delve/delve
 
 **Example: run tests for a package when any file in that package is saved**
+
 ```
 gotestsum --watch --format testname
 ```
@@ -430,38 +438,37 @@ gotestsum --watch --format testname
 
 The projects below use (or have used) gotestsum.
 
-* [kubernetes](https://github.com/kubernetes/kubernetes/blob/master/hack/tools/tools.go)
-* [moby](https://github.com/moby/moby/blob/master/hack/test/unit) (aka Docker)
-* [etcd](https://github.com/etcd-io/etcd/blob/main/tools/mod/tools.go)
-* [hashicorp/vault](https://github.com/hashicorp/vault/blob/main/tools/tools.go)
-* [hashicorp/consul](https://github.com/hashicorp/consul/blob/main/.github/workflows/reusable-unit.yml)
-* [prometheus](https://github.com/prometheus/prometheus/blob/main/Makefile.common)
-* [minikube](https://github.com/kubernetes/minikube/blob/master/hack/jenkins/common.ps1)
-* [influxdb](https://github.com/influxdata/influxdb/blob/master/scripts/ci/build-tests.sh)
-* [pulumi](https://github.com/pulumi/pulumi/blob/master/.github/workflows/ci.yml)
-* [grafana/k6](https://github.com/grafana/k6/issues/1986#issuecomment-996625874)
-* [grafana/loki](https://github.com/grafana/loki/blob/main/loki-build-image/Dockerfile)
-* [telegraf](https://github.com/influxdata/telegraf/blob/master/.circleci/config.yml)
-* [containerd](https://github.com/containerd/containerd/blob/main/.cirrus.yml)
-* [linkerd2](https://github.com/linkerd/linkerd2/blob/main/justfile)
-* [elastic/go-elasticsearch](https://github.com/elastic/go-elasticsearch/blob/main/Makefile)
-* [microsoft/hcsshim](https://github.com/microsoft/hcsshim/blob/main/.github/workflows/ci.yml)
-* [pingcap/tidb](https://github.com/pingcap/tidb/blob/master/Makefile)
-* [dex](https://github.com/dexidp/dex/blob/master/Makefile)
-* [coder](https://github.com/coder/coder/blob/main/Makefile)
-* [docker/cli](https://github.com/docker/cli/blob/master/Makefile)
-* [mattermost](https://github.com/mattermost/mattermost/blob/master/server/Makefile)
-* [gofiber/fiber](https://github.com/gofiber/fiber/blob/main/.github/workflows/test.yml)
+- [kubernetes](https://github.com/kubernetes/kubernetes/blob/master/hack/tools/tools.go)
+- [moby](https://github.com/moby/moby/blob/master/hack/test/unit) (aka Docker)
+- [etcd](https://github.com/etcd-io/etcd/blob/main/tools/mod/tools.go)
+- [hashicorp/vault](https://github.com/hashicorp/vault/blob/main/tools/tools.go)
+- [hashicorp/consul](https://github.com/hashicorp/consul/blob/main/.github/workflows/reusable-unit.yml)
+- [prometheus](https://github.com/prometheus/prometheus/blob/main/Makefile.common)
+- [minikube](https://github.com/kubernetes/minikube/blob/master/hack/jenkins/common.ps1)
+- [influxdb](https://github.com/influxdata/influxdb/blob/master/scripts/ci/build-tests.sh)
+- [pulumi](https://github.com/pulumi/pulumi/blob/master/.github/workflows/ci.yml)
+- [grafana/k6](https://github.com/grafana/k6/issues/1986#issuecomment-996625874)
+- [grafana/loki](https://github.com/grafana/loki/blob/main/loki-build-image/Dockerfile)
+- [telegraf](https://github.com/influxdata/telegraf/blob/master/.circleci/config.yml)
+- [containerd](https://github.com/containerd/containerd/blob/main/.cirrus.yml)
+- [linkerd2](https://github.com/linkerd/linkerd2/blob/main/justfile)
+- [elastic/go-elasticsearch](https://github.com/elastic/go-elasticsearch/blob/main/Makefile)
+- [microsoft/hcsshim](https://github.com/microsoft/hcsshim/blob/main/.github/workflows/ci.yml)
+- [pingcap/tidb](https://github.com/pingcap/tidb/blob/master/Makefile)
+- [dex](https://github.com/dexidp/dex/blob/master/Makefile)
+- [coder](https://github.com/coder/coder/blob/main/Makefile)
+- [docker/cli](https://github.com/docker/cli/blob/master/Makefile)
+- [mattermost](https://github.com/mattermost/mattermost/blob/master/server/Makefile)
+- [gofiber/fiber](https://github.com/gofiber/fiber/blob/main/.github/workflows/test.yml)
 
 Please open a GitHub issue or pull request to add or remove projects from this list.
 
 ## Development
 
-[![Godoc](https://godoc.org/gotest.tools/gotestsum?status.svg)](https://pkg.go.dev/gotest.tools/gotestsum?tab=subdirectories)
+[![Godoc](https://godoc.org/github.com/devleejb/gotestsum?status.svg)](https://pkg.go.dev/github.com/devleejb/gotestsum?tab=subdirectories)
 [![CircleCI](https://circleci.com/gh/gotestyourself/gotestsum/tree/main.svg?style=shield)](https://circleci.com/gh/gotestyourself/gotestsum/tree/main)
 [![Go Recipes](https://raw.githubusercontent.com/nikolaydubina/go-recipes/main/badge.svg?raw=true)](https://github.com/nikolaydubina/go-recipes)
-[![Go Reportcard](https://goreportcard.com/badge/gotest.tools/gotestsum)](https://goreportcard.com/report/gotest.tools/gotestsum)
-
+[![Go Reportcard](https://goreportcard.com/badge/github.com/devleejb/gotestsum)](https://goreportcard.com/report/github.com/devleejb/gotestsum)
 
 Pull requests and bug reports are welcome! Please open an issue first for any
 big changes.
