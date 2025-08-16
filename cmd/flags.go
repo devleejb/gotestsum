@@ -6,10 +6,10 @@ import (
 	"path"
 	"strings"
 
+	"github.com/devleejb/gotestsum/internal/junitxml"
+	"github.com/devleejb/gotestsumtestsum/testjson"
 	"github.com/dnephin/pflag"
 	"github.com/google/shlex"
-	"gotest.tools/gotestsum/internal/junitxml"
-	"gotest.tools/gotestsum/testjson"
 )
 
 type hideSummaryValue struct {

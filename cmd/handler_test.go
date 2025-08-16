@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"gotest.tools/gotestsum/internal/junitxml"
-	"gotest.tools/gotestsum/internal/text"
-	"gotest.tools/gotestsum/testjson"
+	"github.com/devleejb/gotestsum/internal/junitxml"
+	"github.com/devleejb/gotestsumtestsum/internal/text"
+	"github.com/devleejb/gotestsumtestsum/testjson"
 	"gotest.tools/v3/assert"
 	"gotest.tools/v3/assert/cmp"
 	"gotest.tools/v3/fs"

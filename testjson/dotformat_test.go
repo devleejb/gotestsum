@@ -10,8 +10,8 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"gotest.tools/gotestsum/internal/dotwriter"
-	"gotest.tools/gotestsum/internal/text"
+	"github.com/devleejb/gotestsum/internal/dotwriter"
+	"github.com/devleejb/gotestsumtestsum/internal/text"
 	"gotest.tools/v3/assert"
 	"gotest.tools/v3/assert/cmp"
 	"gotest.tools/v3/golden"

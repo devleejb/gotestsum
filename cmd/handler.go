@@ -8,9 +8,9 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"gotest.tools/gotestsum/internal/junitxml"
-	"gotest.tools/gotestsum/internal/log"
-	"gotest.tools/gotestsum/testjson"
+	"github.com/devleejb/gotestsum/internal/junitxml"
+	"github.com/devleejb/gotestsum/internal/log"
+	"github.com/devleejb/gotestsum/testjson"
 )
 
 type eventHandler struct {

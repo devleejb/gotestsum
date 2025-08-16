@@ -1,4 +1,4 @@
-module gotest.tools/gotestsum
+module github.com/devleejb/gotestsum
 
 go 1.23.0
 

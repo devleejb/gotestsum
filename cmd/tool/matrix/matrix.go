@@ -12,9 +12,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/devleejb/gotestsum/internal/log"
+	"github.com/devleejb/gotestsumtestsum/testjson"
 	"github.com/dnephin/pflag"
-	"gotest.tools/gotestsum/internal/log"
-	"gotest.tools/gotestsum/testjson"
 )
 
 func Run(name string, args []string) error {
