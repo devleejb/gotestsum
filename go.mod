@@ -22,3 +22,5 @@ require (
 	golang.org/x/mod v0.26.0 // indirect
 	golang.org/x/text v0.17.0 // indirect
 )
+
+replace gotest.tools/gotestsum => github.com/devleejb/gotestsum v2.0.0
